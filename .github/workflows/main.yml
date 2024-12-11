@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  test-backend: 
+  test-backend:
     runs-on: ubuntu-22.04
     steps:
       # Étape 1 : Checkout du code source
@@ -20,8 +20,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt' # Spécifie le fournisseur (adopt, zulu, temurin, etc.)
+          distribution: 'adopt'
 
       # Étape 3 : Build et tests Maven
       - name: Build and test with Maven
-        run: mvn clean verify
+        run: mvn clean verify --file ./simple-api/pom.xml
