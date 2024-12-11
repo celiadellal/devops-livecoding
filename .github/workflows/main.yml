@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'adopt' # Spécifie le fournisseur (adopt, zulu, temurin, etc.)
 
       # Étape 3 : Build et tests Maven
       - name: Build and test with Maven
