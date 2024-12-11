@@ -21,9 +21,11 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
+      # Étape : Build et tests Maven
       - name: Build and test with Maven
         run: mvn clean verify --file ./simple-api/pom.xml
 
+      # Étape : Analyse avec SonarCloud
       - name: Analyze code with SonarCloud
         run: mvn -B verify sonar:sonar \
               -Dsonar.projectKey=celiadellal_devops-livecoding \
@@ -49,7 +51,7 @@ jobs:
       - name: Build image and push backend
         uses: docker/build-push-action@v3
         with:
-          context: ./simple-api  # Chemin vers le Dockerfile du backend
+          context: ./simple-api
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -57,7 +59,7 @@ jobs:
       - name: Build image and push database
         uses: docker/build-push-action@v3
         with:
-          context: ./database  # Chemin vers le Dockerfile de la base de données
+          context: ./database
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -65,6 +67,6 @@ jobs:
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
         with:
-          context: ./http-server  # Chemin vers le Dockerfile du serveur HTTP
+          context: ./http-server
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
