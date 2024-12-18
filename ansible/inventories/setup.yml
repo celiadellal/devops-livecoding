@@ -1,0 +1,8 @@
+all:
+  vars:
+    ansible_user: admin
+    ansible_ssh_private_key_file: /home/ubuntu/Desktop/Big_data_takima/id_rsa
+  children:
+    prod:
+      hosts:
+        celia.dellal.takima.cloud
